@@ -12,7 +12,7 @@
 # https://opensource.org/licenses/MIT
 
 PACKAGE=		opamconfig
-VERSION=		0.1.0
+VERSION=		0.1.0-current
 OFFICER=		michipili@gmail.com
 
 .include "generic.project.mk"

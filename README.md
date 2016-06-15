@@ -34,7 +34,7 @@ Please note that using the OS as a proxy for the correct values of
 *LDFLAGS* or *CFLAGS* as in the first snippet is broken, as it ignores
 special deployments, ignores user-installed software and ignores the
 variety of package systems (*brew*, *macports*, *PKGSRC* to quote the
-three most used on *darwin* systems.  In contrast, the second snippet
+three most used on *darwin* systems).  In contrast, the second snippet
 uses values detected by **opamconfig** to provide sensible parameters
 to the `./configure` script.
 

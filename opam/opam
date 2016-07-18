@@ -10,5 +10,12 @@ tags: [
   "opam" "configure"
 ]
 build: [
-  ["sh" "./detect_configure_settings.sh" "./opamconfig.config"]
+  ["./configure" "--prefix" prefix]
+  [conf-bmake:path "-I%{bsdowl:share}%" "all"]
+]
+install: [
+  [conf-bmake:path "-I%{bsdowl:share}%" "install"]
+]
+remove: [
+  ["rm" "%{prefix}%/bin/opamconfig"]
 ]

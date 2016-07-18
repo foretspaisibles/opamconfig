@@ -15,6 +15,8 @@ PACKAGE=		opamconfig
 VERSION=		0.1.0-current
 OFFICER=		michipili@gmail.com
 
-.include "generic.project.mk"
+PROGRAM=		opamconfig.sh
+
+.include "shell.prog.mk"
 
 ### End of file ``Makefile''

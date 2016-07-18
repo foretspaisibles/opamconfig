@@ -1,0 +1,53 @@
+### @autoconf_input@
+
+# opamconfig (https://github.com/michipili/opamconfig)
+# This file is part of opamconfig
+#
+# Copyright © 2016 Michael Grünewald
+#
+# This file must be used under the terms of the MIT license.
+# This source file is licensed as described in the file LICENSE, which
+# you should have received as part of this distribution. The terms
+# are also available at
+# https://opensource.org/licenses/MIT
+
+prefix?=		@prefix@
+exec_prefix?=		@exec_prefix@
+bindir?=		@bindir@
+sbindir?=		@sbindir@
+libexecdir?=		@libexecdir@
+datarootdir?=		@datarootdir@
+datadir?=		@datadir@
+sysconfdir?=		@sysconfdir@
+sharedstatedir?=	@sharedstatedir@
+localstatedir?=		@localstatedir@
+runstatedir?=		@runstatedir@
+includedir?=		@includedir@
+docdir?=		@docdir@
+infodir?=		@infodir@
+libdir?=		@libdir@
+localedir?=		@localedir@
+mandir?=		@mandir@
+
+PREFIX?=		${prefix}
+EXEC_PREFIX?=		${exec_prefix}
+DATAROOTDIR?=		${datarootdir}
+
+AC_PATH_BREW=		@BREW@
+AC_PATH_OCAMLFIND=	@OCAMLFIND@
+AC_PATH_PIP=		@PIP@
+AC_PATH_PKG=		@PKG@
+AC_PATH_PORT=		@PORT@
+
+REPLACESUBST=		${STDREPLACESUBST}
+REPLACESUBST+=		AC_PATH_BREW
+REPLACESUBST+=		AC_PATH_OCAMLFIND
+REPLACESUBST+=		AC_PATH_PIP
+REPLACESUBST+=		AC_PATH_PKG
+REPLACESUBST+=		AC_PATH_PORT
+
+# Local Variables:
+# mode: makefile
+# End:
+
+### End of file ``Makefile.config.in''

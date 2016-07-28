@@ -265,5 +265,5 @@ while getopts 'd:f:hx' OPTION; do
     esac
 done
 
-shift $(( ${OPTIND} - 1 ))
+shift $(( OPTIND - 1 ))
 opamconfig_action_${opamconfig_action} "$@"

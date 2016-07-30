@@ -17,7 +17,7 @@ AC_PATH_PROG([OCAMLFIND], [ocamlfind], [no])
 AC_PATH_PROG([PIP], [pip], [no])
 AC_PATH_PROG([PKG], [pkg], [no])
 AC_PATH_PROG([PORT], [port], [no])
-AC_CONFIG_FILES([Makefile.config])
+AC_CONFIG_FILES([Makefile.config opamconfig_conf.sh])
 AC_OUTPUT
 
 ### End of file `configure.ac'

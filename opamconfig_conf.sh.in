@@ -1,4 +1,4 @@
-### Makefile -- I am too lazy to write a proper description
+### opamconfig_conf.sh -- Configuration for opamconfig testtool
 
 # opamconfig (https://github.com/michipili/opamconfig)
 # This file is part of opamconfig
@@ -11,12 +11,10 @@
 # are also available at
 # https://opensource.org/licenses/MIT
 
-PACKAGE=		opamconfig
-VERSION=		0.2.0
-OFFICER=		michipili@gmail.com
+: ${ac_path_brew:=@BREW@}
+: ${ac_path_pip:=@PIP@}
+: ${ac_path_pkg:=@PKG@}
+: ${ac_path_port:=@PORT@}
+: ${ac_path_ocamlfind:=@OCAMLFIND@}
 
-PROGRAM=		opamconfig.sh
-
-.include "shell.prog.mk"
-
-### End of file ``Makefile''
+### End of file `opmaconfig_conf.sh'

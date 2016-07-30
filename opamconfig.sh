@@ -245,25 +245,27 @@ opamconfig_action_runtest()
 }
 
 
-opamconfig_action_experiment()
-{
-    pathmatrix "$(prefixdb|fold)" "${opam_packagedirdb}"
-}
-
-
 opamconfig_action='runtest'
 opamconfig_packagedirdb=':'
 opamconfig_outputfile='/dev/null'
 
-while getopts 'd:f:hx' OPTION; do
-    case "${OPTION}" in
-        d)	opamconfig_packagedirdb="${OPTARG}";;
-        f)	opamconfig_outputfile="${OPTARG}";;
-        h)	opamconfig_action='help';;
-        x)	opamconfig_action='experiment';;
-        ?)	opamconfig_action_usage 64;;
-    esac
-done
+opamconfig_main()
+{
+    while getopts 'd:f:h' OPTION; do
+        case "${OPTION}" in
+            d)	opamconfig_packagedirdb="${OPTARG}";;
+            f)	opamconfig_outputfile="${OPTARG}";;
+            h)	opamconfig_action='help';;
+            ?)	opamconfig_action_usage 64;;
+        esac
+    done
 
-shift $(( OPTIND - 1 ))
-opamconfig_action_${opamconfig_action} "$@"
+    shift $(( OPTIND - 1 ))
+    opamconfig_action_${opamconfig_action} "$@"
+}
+
+if [ -n "${opamconfig_test}" ]; then
+    : 'We run in test mode.'
+else
+    opamconfig_main "$@"
+fi

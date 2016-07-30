@@ -11,3 +11,4 @@ Makefile.config
 Makefile.local
 .merlin
 .product
+opamconfig_conf.sh

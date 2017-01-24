@@ -12,7 +12,7 @@
 # https://opensource.org/licenses/MIT
 
 PACKAGE=		opamconfig
-VERSION=		0.2.0-current
+VERSION=		0.3.0
 OFFICER=		michipili@gmail.com
 
 PROGRAM=		opamconfig.sh

@@ -13,11 +13,22 @@
 
 PACKAGE='opamconfig'
 
+: ${ac_path_apk:=@AC_PATH_APK@}
+: ${ac_path_apt:=@AC_PATH_APT@}
+: ${ac_path_aptitude:=@AC_PATH_APTITUDE@}
+: ${ac_path_apt_get:=@AC_PATH_APT_GET@}
 : ${ac_path_brew:=@AC_PATH_BREW@}
-: ${ac_path_pip:=@AC_PATH_PIP@}
-: ${ac_path_pkg:=@AC_PATH_PKG@}
-: ${ac_path_port:=@AC_PATH_PORT@}
+: ${ac_path_dpkg:=@AC_PATH_DPKG@}
+: ${ac_path_emerge:=@AC_PATH_EMERGE@}
+: ${ac_path_nix_env:=@AC_PATH_NIX_ENV@}
 : ${ac_path_ocamlfind:=@AC_PATH_OCAMLFIND@}
+: ${ac_path_pacman:=@AC_PATH_PACMAN@}
+: ${ac_path_pkg:=@AC_PATH_PKG@}
+: ${ac_path_pkg_add:=@AC_PATH_PKG_ADD@}
+: ${ac_path_port:=@AC_PATH_PORT@}
+: ${ac_path_setup_exe:=@AC_PATH_SETUP_EXE@}
+: ${ac_path_yum:=@AC_PATH_YUM@}
+: ${ac_path_zypper:=@AC_PATH_ZYPPER@}
 
 
 # wlog PRINTF-LIKE-ARGV
@@ -99,11 +110,25 @@ prefixdb()
 
 prefixdb__heuristic()
 {
-    { sed -e '/^no$/d;s@/sbin$@@;s@/bin$@@;/^$/d' | uniq; } <<EOF
+    { sed -e '/^#/d;/^no$/d;s@/sbin$@@;s@/bin$@@;/^$/d' | uniq; } <<EOF
+${ac_path_apk%/*}
+# ${ac_path_apt%/*}
+#   On OS-X apt is also the name of a standard utiliy and Debian
+#   based systems also provide dpkg.
+${ac_path_aptitude%/*}
+${ac_path_apt_get%/*}
 ${ac_path_brew%/*}
-${ac_path_pkg%/*}
-${ac_path_port%/*}
+${ac_path_dpkg%/*}
+${ac_path_emerge%/*}
+${ac_path_nix_env%/*}
 ${ac_path_ocamlfind%/*}
+${ac_path_pacman%/*}
+${ac_path_pkg%/*}
+${ac_path_pkg_add%/*}
+${ac_path_port%/*}
+${ac_path_setup_exe%/*}
+${ac_path_yum%/*}
+${ac_path_zypper%/*}
 EOF
 }
 

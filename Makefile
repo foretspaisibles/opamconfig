@@ -3,7 +3,7 @@
 # opamconfig (https://github.com/michipili/opamconfig)
 # This file is part of opamconfig
 #
-# Copyright © 2016 Michael Grünewald
+# Copyright © 2016–2017 Michael Grünewald
 #
 # This file must be used under the terms of the MIT license.
 # This source file is licensed as described in the file LICENSE, which

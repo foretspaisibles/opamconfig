@@ -13,6 +13,7 @@
 
 PACKAGE='opamconfig'
 
+: ${ac_opam_os:=@AC_OPAM_OS@}
 : ${ac_path_apk:=@AC_PATH_APK@}
 : ${ac_path_apt:=@AC_PATH_APT@}
 : ${ac_path_aptitude:=@AC_PATH_APTITUDE@}
@@ -103,7 +104,7 @@ EOF
 prefixdb()
 {
     if [ -z "${OPAMCONFIG_PREFIX}" ]; then
-        prefixdb__heuristic
+        prefixdb__heuristic | tr ':' '\n'
     else
         printf '%s' "${OPAMCONFIG_PREFIXDB}" | tr ':' '\n'
     fi
@@ -111,7 +112,19 @@ prefixdb()
 
 prefixdb__heuristic()
 {
-    { sed -e '/^#/d;/^no$/d;s@/sbin$@@;s@/bin$@@;/^$/d' | uniq; } <<EOF
+    { sed -e '
+# Skip comments
+/^#/d
+
+# Skip package managers not found by the configure script
+/|no$/d
+
+# Derive installation prefixes,
+#  by removing the s?bin part of the name
+s@/sbin$@@
+s@/bin$@@
+/^$/d
+' | uniq; } <<EOF
 ${ac_path_apk%/*}
 # ${ac_path_apt%/*}
 #   On OS-X apt is also the name of a standard utiliy and Debian

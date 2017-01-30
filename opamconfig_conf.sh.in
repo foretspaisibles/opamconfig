@@ -3,7 +3,7 @@
 # opamconfig (https://github.com/michipili/opamconfig)
 # This file is part of opamconfig
 #
-# Copyright © 2016 Michael Grünewald
+# Copyright © 2016–2017 Michael Grünewald
 #
 # This file must be used under the terms of the MIT license.
 # This source file is licensed as described in the file LICENSE, which
@@ -11,10 +11,22 @@
 # are also available at
 # https://opensource.org/licenses/MIT
 
-: ${ac_path_brew:=@BREW@}
-: ${ac_path_pip:=@PIP@}
-: ${ac_path_pkg:=@PKG@}
-: ${ac_path_port:=@PORT@}
-: ${ac_path_ocamlfind:=@OCAMLFIND@}
+: ${ac_path_apk:=@AC_PATH_APK@}
+: ${ac_path_apt:=@AC_PATH_APT@}
+: ${ac_path_aptitude:=@AC_PATH_APTITUDE@}
+: ${ac_path_apt_get:=@AC_PATH_APT_GET@}
+: ${ac_path_brew:=@AC_PATH_BREW@}
+: ${ac_path_dpkg:=@AC_PATH_DPKG@}
+: ${ac_path_emerge:=@AC_PATH_EMERGE@}
+: ${ac_path_nix_env:=@AC_PATH_NIX_ENV@}
+: ${ac_path_ocamlfind:=@AC_PATH_OCAMLFIND@}
+: ${ac_path_pip:=@AC_PATH_PIP@}
+: ${ac_path_pacman:=@AC_PATH_PACMAN@}
+: ${ac_path_pkg:=@AC_PATH_PKG@}
+: ${ac_path_pkg_add:=@AC_PATH_PKG_ADD@}
+: ${ac_path_port:=@AC_PATH_PORT@}
+: ${ac_path_setup_exe:=@AC_PATH_SETUP_EXE@}
+: ${ac_path_yum:=@AC_PATH_YUM@}
+: ${ac_path_zypper:=@AC_PATH_ZYPPER@}
 
 ### End of file `opmaconfig_conf.sh'

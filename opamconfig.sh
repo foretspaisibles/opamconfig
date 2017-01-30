@@ -3,7 +3,7 @@
 # opamconfig (https://github.com/michipili/opamconfig)
 # This file is part of opamconfig
 #
-# Copyright © 2016 Michael Grünewald
+# Copyright © 2016–2017 Michael Grünewald
 #
 # This file must be used under the terms of the MIT license.
 # This source file is licensed as described in the file LICENSE, which
@@ -13,11 +13,24 @@
 
 PACKAGE='opamconfig'
 
+: ${ac_opam_os:=@AC_OPAM_OS@}
+: ${ac_path_apk:=@AC_PATH_APK@}
+: ${ac_path_apt:=@AC_PATH_APT@}
+: ${ac_path_aptitude:=@AC_PATH_APTITUDE@}
+: ${ac_path_apt_get:=@AC_PATH_APT_GET@}
 : ${ac_path_brew:=@AC_PATH_BREW@}
+: ${ac_path_dpkg:=@AC_PATH_DPKG@}
+: ${ac_path_emerge:=@AC_PATH_EMERGE@}
+: ${ac_path_nix_env:=@AC_PATH_NIX_ENV@}
+: ${ac_path_ocamlfind:=@AC_PATH_OCAMLFIND@}
+: ${ac_path_pacman:=@AC_PATH_PACMAN@}
 : ${ac_path_pip:=@AC_PATH_PIP@}
 : ${ac_path_pkg:=@AC_PATH_PKG@}
+: ${ac_path_pkg_add:=@AC_PATH_PKG_ADD@}
 : ${ac_path_port:=@AC_PATH_PORT@}
-: ${ac_path_ocamlfind:=@AC_PATH_OCAMLFIND@}
+: ${ac_path_setup_exe:=@AC_PATH_SETUP_EXE@}
+: ${ac_path_yum:=@AC_PATH_YUM@}
+: ${ac_path_zypper:=@AC_PATH_ZYPPER@}
 
 
 # wlog PRINTF-LIKE-ARGV
@@ -91,7 +104,7 @@ EOF
 prefixdb()
 {
     if [ -z "${OPAMCONFIG_PREFIX}" ]; then
-        prefixdb__heuristic
+        prefixdb__heuristic | tr ':' '\n'
     else
         printf '%s' "${OPAMCONFIG_PREFIXDB}" | tr ':' '\n'
     fi
@@ -99,11 +112,38 @@ prefixdb()
 
 prefixdb__heuristic()
 {
-    { sed -e '/^no$/d;s@/sbin$@@;s@/bin$@@;/^$/d' | uniq; } <<EOF
+    { sed -e '
+# Skip comments
+/^#/d
+
+# Skip package managers not found by the configure script
+/|no$/d
+
+# Derive installation prefixes,
+#  by removing the s?bin part of the name
+s@/sbin$@@
+s@/bin$@@
+/^$/d
+' | uniq; } <<EOF
+${ac_path_apk%/*}
+# ${ac_path_apt%/*}
+#   On OS-X apt is also the name of a standard utiliy and Debian
+#   based systems also provide dpkg.
+${ac_path_aptitude%/*}
+${ac_path_apt_get%/*}
 ${ac_path_brew%/*}
-${ac_path_pkg%/*}
-${ac_path_port%/*}
+${ac_path_dpkg%/*}
+${ac_path_emerge%/*}
+${ac_path_nix_env%/*}
 ${ac_path_ocamlfind%/*}
+${ac_path_pacman%/*}
+${ac_path_pip%/*}
+${ac_path_pkg%/*}
+${ac_path_pkg_add%/*}
+${ac_path_port%/*}
+${ac_path_setup_exe%/*}
+${ac_path_yum%/*}
+${ac_path_zypper%/*}
 EOF
 }
 

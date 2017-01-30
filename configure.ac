@@ -83,6 +83,41 @@ OPAMCONFIG_PATH_PROG([setup.exe])
 OPAMCONFIG_PATH_PROG([yum])
 OPAMCONFIG_PATH_PROG([zypper])
 
+OPAM_OS=$(opam config var os)
+
+
+#
+# Handle various special cases
+#
+
+AC_DEFUN([OPAMCONFIG_EXCEPTION],
+  [case "${OPAM_OS}-${$2}" in
+  *-no)		: ;;
+  $1-*)		$2=$3;;
+  *)		: ;;
+esac;])
+
+
+# On alpine Linux, apk is installed in /sbin but packages in /usr,
+#  which is a different installation prefix.
+
+OPAMCONFIG_EXCEPTION([alpine], [APK], [/usr])
+
+
+# On FreeBSD, pkg is installed in /usr/sbin but packages are in /usr/local,
+#  which is a different installation prefix.
+
+OPAMCONFIG_EXCEPTION([freebsd], [PKG], [/usr/local])
+
+
+# On NetBSD, pkg_add is installed in /usr/sbin but packages are in /usr/pkg,
+#  which is a different installation prefix, while OpenBSD uses /usr/local.
+
+OPAMCONFIG_EXCEPTION([netbsd], [PKG_ADD], [/usr/pkg])
+OPAMCONFIG_EXCEPTION([openbsd], [PKG_ADD], [/usr/local])
+
+
+AC_SUBST([OPAM_OS])
 AC_CONFIG_FILES([Makefile.config opamconfig_conf.sh])
 AC_OUTPUT
 

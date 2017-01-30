@@ -13,6 +13,8 @@
 
 AC_INIT([opamconfig.sh])
 
+AC_PATH_PROG([PIP], [pip], [no])
+
 # At the time of writing, the following systems appear in depexts
 # statements, with their canonical package manager, if any, in the
 # second column.

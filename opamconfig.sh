@@ -23,6 +23,7 @@ PACKAGE='opamconfig'
 : ${ac_path_nix_env:=@AC_PATH_NIX_ENV@}
 : ${ac_path_ocamlfind:=@AC_PATH_OCAMLFIND@}
 : ${ac_path_pacman:=@AC_PATH_PACMAN@}
+: ${ac_path_pip:=@AC_PATH_PIP@}
 : ${ac_path_pkg:=@AC_PATH_PKG@}
 : ${ac_path_pkg_add:=@AC_PATH_PKG_ADD@}
 : ${ac_path_port:=@AC_PATH_PORT@}
@@ -123,6 +124,7 @@ ${ac_path_emerge%/*}
 ${ac_path_nix_env%/*}
 ${ac_path_ocamlfind%/*}
 ${ac_path_pacman%/*}
+${ac_path_pip%/*}
 ${ac_path_pkg%/*}
 ${ac_path_pkg_add%/*}
 ${ac_path_port%/*}

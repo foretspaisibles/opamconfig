@@ -20,6 +20,7 @@
 : ${ac_path_emerge:=@AC_PATH_EMERGE@}
 : ${ac_path_nix_env:=@AC_PATH_NIX_ENV@}
 : ${ac_path_ocamlfind:=@AC_PATH_OCAMLFIND@}
+: ${ac_path_pip:=@AC_PATH_PIP@}
 : ${ac_path_pacman:=@AC_PATH_PACMAN@}
 : ${ac_path_pkg:=@AC_PATH_PKG@}
 : ${ac_path_pkg_add:=@AC_PATH_PKG_ADD@}

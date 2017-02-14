@@ -212,7 +212,11 @@ function q(text, _answer, _squote) {
   return sprintf("%s%s%s", _squote, _answer, _squote);
 }
 
-{printf("%s: %s\n", $2, q(ENVIRON[$1]))}
+{
+  if(ENVIRON[$1] != "") {
+    printf("%s: %s\n", $2, q(ENVIRON[$1]))
+  }
+}
 '
 }
 
@@ -229,9 +233,20 @@ runtest()
     packagedirlist="$2"
     shift 2
 
-    pathmatrix "${prefixlist}" "${packagedirlist}" | runtest__loop "$@"
-
+    if ! runtest__perform_save "$@"; then
+        pathmatrix "${prefixlist}" "${packagedirlist}" | runtest__loop "$@"
+    fi
     [ -s "${tmpfile}" ]
+}
+
+runtest__perform_save()
+{
+    if "$@"; then
+        print_config > "${tmpfile}"
+        return 0
+    else
+        return 1
+    fi
 }
 
 runtest__loop()
@@ -244,10 +259,7 @@ runtest__loop()
 
     while read environment; do
         eval ${environment}
-        if "$@"; then
-            print_config > "${tmpfile}"
-            exit
-        fi
+        if runtest__perform_save "$@"; then break; fi
     done
 }
 

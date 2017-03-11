@@ -24,6 +24,7 @@ print_testhelp()
 Usage: ${PACKAGE} [-ph]
  Detect configure settings
 Options:
+ -I Exercise the variable function.
  -h Print a help message.
  -p Exercise the pathmatrix function.
 EOF
@@ -46,10 +47,18 @@ test_action_pathmatrix()
     pathmatrix "$@"
 }
 
+test_action_variable()
+{
+    wlog 'Test: Exercise the print variable function.'
+    opamconfig_variable='CFLAGS'
+    opamconfig_action_variable conf-gmp conf-gmp
+}
+
 test_action='help'
 
-while getopts 'hp' OPTION; do
+while getopts 'Ihp' OPTION; do
     case "${OPTION}" in
+        I)	test_action='variable';;
         h)	test_action='help';;
         p)	test_action='pathmatrix';;
         ?)	test_action_usage 64;;

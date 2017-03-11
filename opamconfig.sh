@@ -270,10 +270,19 @@ print_help()
 Usage: ${PACKAGE} [-d PACKAGEDIRDB]
  Detect configure settings
 Options:
+ -V VARIABLE
+    Instead of detecting configuration settings, print the
+    resulting value for VARIABLE given package names passed
+    as regular arguments.
  -d PACKAGEDIRDB
     Use PACKAGEDIRDB as list of package directories.
  -f OUTPUT-FILE
     Write resulting configuration to OUTPUT-FILE.
+ -h Print this help message.
+Examples:
+  opamconfig -V CFLAGS conf-gmp conf-gsl
+   Print a value -I/path1 -I/path2 … suitable to be assigned to
+   the CFLAGS variable.
 EOF
 }
 
@@ -282,6 +291,32 @@ opamconfig_action_help()
 {
     print_help
     exit 0
+}
+
+opamconfig_action_variable()
+{
+    local package opamconf sep
+
+    sep=''
+    opamconf=$(variabledb | awk -F '|' -v "variable=${opamconfig_variable}" '$1 == variable {print($2)}')
+
+    {
+        for package in "$@"; do
+            opam config var "${package}:${opamconf}"
+        done
+    } | awk -v "variable=${opamconfig_variable}" '
+!($0 in seen) {
+  ax = ax sep $0
+  sep = " "
+  seen[$0]
+}
+
+END {
+ if(NR > 0){
+   printf("%s=%s", variable, ax);
+ }
+}
+'
 }
 
 opamconfig_action_runtest()
@@ -303,8 +338,9 @@ opamconfig_outputfile='/dev/null'
 
 opamconfig_main()
 {
-    while getopts 'd:f:h' OPTION; do
+    while getopts 'V:d:f:h' OPTION; do
         case "${OPTION}" in
+            V)	opamconfig_action='variable'; opamconfig_variable="${OPTARG}";;
             d)	opamconfig_packagedirdb="${OPTARG}";;
             f)	opamconfig_outputfile="${OPTARG}";;
             h)	opamconfig_action='help';;

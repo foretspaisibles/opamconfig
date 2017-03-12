@@ -21,7 +21,6 @@ PACKAGE='opamconfig'
 : ${ac_path_brew:=@AC_PATH_BREW@}
 : ${ac_path_dpkg:=@AC_PATH_DPKG@}
 : ${ac_path_emerge:=@AC_PATH_EMERGE@}
-: ${ac_path_nix_env:=@AC_PATH_NIX_ENV@}
 : ${ac_path_ocamlfind:=@AC_PATH_OCAMLFIND@}
 : ${ac_path_pacman:=@AC_PATH_PACMAN@}
 : ${ac_path_pip:=@AC_PATH_PIP@}
@@ -134,7 +133,6 @@ ${ac_path_apt_get%/*}
 ${ac_path_brew%/*}
 ${ac_path_dpkg%/*}
 ${ac_path_emerge%/*}
-${ac_path_nix_env%/*}
 ${ac_path_ocamlfind%/*}
 ${ac_path_pacman%/*}
 ${ac_path_pip%/*}
